@@ -7,13 +7,13 @@ $(window).on("load", async function() {
 
         if(val == "") {
             showMessage("message-3", `
-            Username can't be empty!
+            ⚠️Username can't be empty!
             `);
             return;
         }
 
         if(getCookie("slow")) {
-            showMessage("message-3", "SLOW DOWN!");
+            showMessage("message-3", "⌛SLOW DOWN!");
             return;
         } else {
             setCookie("slow", 1, 20000)
@@ -21,7 +21,7 @@ $(window).on("load", async function() {
 
         if(!apiStatus) {
             showMessage("message-3", `
-            Internal error, try again in one hour!
+            🚨Internal error, try again in one hour!
             `);
             return;
         }
@@ -34,18 +34,18 @@ $(window).on("load", async function() {
         if(!res.error) {
             if(res.message == "Available") {
                 showMessage("message-1", `
-                You're lucky!<br>
+                ✔️You're lucky!<br>
                 <strong><span style="text-decoration:underline;">` + val + `</span> is available.</strong>
                 `);
             } else if(res.message == "Taken") {
                 showMessage("message-2", `
-                Sorry...<br>
+                😭Sorry...<br>
                 <strong><span style="text-decoration:underline;">` + val + `</span> is taken.</strong>
                 `);
             }
         } else {
             let error = res.data?.errors?.username?._errors[0]?.message || res.message;
-            showMessage("message-3", error);
+            showMessage("message-3", "🚨" + error);
         }
     });
 
