@@ -112,6 +112,10 @@ body::-webkit-scrollbar {
   border-color: #ff0000;
   background-color: #ff000050;
 }
+.message-4 {
+  border-color: #b9b027;
+  background-color: #b9b02750;
+}
 
 .text {
   color: #e2e2e2;

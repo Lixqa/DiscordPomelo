@@ -2,6 +2,8 @@ let socket;
 $(window).on("load", async function() {
     await printApiStatus();
 
+    showMessage("message-4", "<strong>NOTE: </strong>It can take some hours to update usernames, so it can happen that a username shows as available but is already taken. Just try again some time later...")
+
     $(".check").on("click", async function(e) {
         let val = $(".username").val().trim().toLowerCase();
 
@@ -16,7 +18,7 @@ $(window).on("load", async function() {
             showMessage("message-3", "⌛SLOW DOWN!");
             return;
         } else {
-            setCookie("slow", 1, 20000)
+            setCookie("slow", 1, 5000)
         }
 
         if(!apiStatus) {
@@ -26,10 +28,16 @@ $(window).on("load", async function() {
             return;
         }
 
+        $(".check").attr("disabled", "disabled");
+        $(".check").val("● ● ●");
+
         let res = await sendApi({
             url: "https://api.lixqa.de/v2/discord/pomelo-lookup/?username=" + val
         });
         console.log(res);
+
+        $(".check").removeAttr("disabled");
+        $(".check").val("Check");
 
         if(!res.error) {
             if(res.message == "Available") {
@@ -44,8 +52,7 @@ $(window).on("load", async function() {
                 `);
             }
         } else {
-            let error = res.data?.errors?.username?._errors[0]?.message || res.message;
-            showMessage("message-3", "🚨" + error);
+            showMessage("message-3", "🚨" + res.message);
         }
     });
 
@@ -84,6 +91,7 @@ function showMessage(type, message) {
     element.removeClass("message-1");
     element.removeClass("message-2");
     element.removeClass("message-3");
+    element.removeClass("message-4");
 
     element.html(message);
     element.addClass(type);
