@@ -52,7 +52,7 @@ $(window).on("load", async function() {
                 `);
             }
         } else {
-            showMessage("message-3", "🚨" + res.message + (res.message.includes("Error") || res.message.includes("error") ? " | If this still happends in some minutes, report on: discord.gg/8n7kfX6S4h" : ""));
+            showMessage("message-3", "🚨" + res.message + ((res.message.includes("Error") || res.message.includes("error")) ? " | If this still happends in some minutes, report on: discord.gg/8n7kfX6S4h" : ""));
         }
     });
 
