@@ -45,14 +45,14 @@ $(window).on("load", async function() {
                 ✔️You're lucky!<br>
                 <strong><span style="text-decoration:underline;">` + val + `</span> is available.</strong>
                 `);
-            } else if(res.message == "Taken") {
+            } else if(res.message == "Taken or reserved") {
                 showMessage("message-2", `
                 😭Sorry...<br>
-                <strong><span style="text-decoration:underline;">` + val + `</span> is taken.</strong>
+                <strong><span style="text-decoration:underline;">` + val + `</span> is taken or reserved.</strong>
                 `);
             }
         } else {
-            showMessage("message-3", "🚨" + res.message);
+            showMessage("message-3", "🚨" + res.message + " | If this still happends in some minutes, report on: discord.gg/8n7kfX6S4h");
         }
     });
 

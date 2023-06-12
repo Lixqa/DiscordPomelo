@@ -129,6 +129,16 @@ body::-webkit-scrollbar {
   position: absolute;
   bottom: 10px;
   font-size: 15px;
+  display: flex;
+  background-color: #282b3088;
+  border-radius: 5px;
+  flex-direction: column;
+  gap: 2px;
+  padding: 5px;
+}
+
+.footer span:last-child {
+  margin-top: 20px;
 }
 
 .footer a {
