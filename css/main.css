@@ -117,6 +117,11 @@ body::-webkit-scrollbar {
   background-color: #b9b02750;
 }
 
+.message-5 {
+  border-color: #2797b9;
+  background-color: #2797b950;
+}
+
 .text {
   color: #e2e2e2;
   font-size: 15px;

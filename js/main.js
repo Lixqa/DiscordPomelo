@@ -2,7 +2,7 @@ let socket;
 $(window).on("load", async function() {
     await printApiStatus();
 
-    showMessage("message-4", "<strong>NOTE: </strong>It can take some hours to update usernames, so it can happen that a username shows as available but is already taken. Just try again some time later...")
+    showMessage("message-4", "<strong>NOTE: </strong>Due the high demand we expect higher loading times and some errors");
 
     $(".check").on("click", async function(e) {
         let val = $(".username").val().trim().toLowerCase();
@@ -14,11 +14,12 @@ $(window).on("load", async function() {
             return;
         }
 
+        //MOST SECURED SLOWDOWN SYSTEM
         if(getCookie("slow")) {
             showMessage("message-3", "⌛SLOW DOWN!");
             return;
         } else {
-            setCookie("slow", 1, 5000)
+            setCookie("slow", 1, 10000);
         }
 
         if(!apiStatus) {
@@ -27,6 +28,10 @@ $(window).on("load", async function() {
             `);
             return;
         }
+
+        showMessage("message-5", `
+        🔍Checking... Wait up to 30 seconds!
+        `);
 
         $(".check").attr("disabled", "disabled");
         $(".check").val("● ● ●");
@@ -38,6 +43,8 @@ $(window).on("load", async function() {
 
         $(".check").removeAttr("disabled");
         $(".check").val("Check");
+
+        hideMessage();
 
         if(!res.error) {
             if(res.message == "Available") {
@@ -92,6 +99,7 @@ function showMessage(type, message) {
     element.removeClass("message-2");
     element.removeClass("message-3");
     element.removeClass("message-4");
+    element.removeClass("message-5");
 
     element.html(message);
     element.addClass(type);
