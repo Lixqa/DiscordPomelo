@@ -182,3 +182,7 @@ body::-webkit-scrollbar {
   font-weight: bold;
   color: #7289da;
 }
+
+.message a {
+  color: white;
+}

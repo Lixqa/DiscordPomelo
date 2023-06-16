@@ -14,17 +14,9 @@ $(window).on("load", async function() {
             return;
         }
 
-        //MOST SECURED SLOWDOWN SYSTEM
-        if(getCookie("slow")) {
-            showMessage("message-3", "⌛SLOW DOWN!");
-            return;
-        } else {
-            setCookie("slow", 1, 10000);
-        }
-
         if(!apiStatus) {
             showMessage("message-3", `
-            🚨Internal error, try again in one hour!
+            🚨API not available, try again in one hour!
             `);
             return;
         }
@@ -59,7 +51,8 @@ $(window).on("load", async function() {
                 `);
             }
         } else {
-            showMessage("message-3", "🚨" + res.message + ((res.message.includes("Error") || res.message.includes("error")) ? " | If this still happends in some minutes, report on: discord.gg/8n7kfX6S4h" : ""));
+            if(res.message == "Rate limited") return showMessage("message-3", "⌛ Slow down for 30 seconds!");
+            showMessage("message-3", "🚨" + res.message + ((res.message.includes("Error") || res.message.includes("error")) ? " | If this still happends in some minutes, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>" : ""));
         }
     });
 
