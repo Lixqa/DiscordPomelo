@@ -16,111 +16,152 @@ body::-webkit-scrollbar {
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  display: flex;
-  background-color: #282b30;
-  flex-direction: column;
-  padding: 10px;
-  border-radius: 5px;
-  gap: 10px;
   width: 250px;
   height: fit-content;
   margin-top: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(40, 43, 48, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(40, 43, 48, 0.8);
 }
 
-.username {
-  box-sizing: border-box;
-  margin: 0;
-  font-family: inherit;
-  overflow: visible;
-  background-color: #1e2124!important;
-  color: #fff!important;
-  border: none!important;
-  outline: none!important;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out!important;
-  border-radius: 4px!important;
-  padding-left: 10px!important;
-  display: block;
-  width: 100%;
-  height: calc(1.5em + .75rem + 2px);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  background-clip: padding-box;
-  padding: .25em;
-}
+/* Add additional styling as per your futuristic design */
 
-.username:focus {
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 0 .2rem #5c8dff!important;
-}
 
-.check {
-  box-sizing: border-box;
-  margin: 0;
-  font-family: inherit;
-  overflow: visible;
-  text-transform: none;
-  width: 5rem!important;
-  display: inline-block!important;
-  background-color: #7289da!important;
-  color: #fff!important;
-  box-shadow: none!important;
-  border: none!important;
-  height: calc(1.5em + .75rem + 2px);
-  background-clip: padding-box;
-  font-weight: 400;
-  text-align: center;
-  vertical-align: middle;
-  user-select: none;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  cursor: pointer;
-
-  align-self: flex-end;
-}
-
-.check:hover {
-  color: #fff!important;
-  box-shadow: none!important;
-  background-color: #94a9f5!important;
-  cursor: pointer;
-}
-
-.message {
-  display: none;
-  border: 2px solid;
-  border-radius: 5px;
-  color: #dddddd;
-  padding: 5px;
-  width: 240px;
-  line-height: 20px;
-}
-
-.message-1 {
-  border-color: #44c444;
-  background-color: #44c44450;
-}
-.message-2 {
-  border-color: #fd5335;
-  background-color: #fd533550;
-}
-.message-3 {
-  border-color: #ff0000;
-  background-color: #ff000050;
-}
-.message-4 {
-  border-color: #b9b027;
-  background-color: #b9b02750;
-}
-
-.message-5 {
-  border-color: #2797b9;
-  background-color: #2797b950;
-}
+  
+  .username {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: inherit;
+    overflow: visible;
+    background-color: #1e2124;
+    color: #fff;
+    border: none;
+    outline: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 4px;
+    padding-left: 10px;
+    display: block;
+    width: calc(100% + 4px);
+    height: calc(1.5em + 0.75rem + 2px);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-clip: padding-box;
+    padding: 0.25em;
+  }
+  
+  .username:focus {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem #5c8dff;
+  }
+  
+  .check {
+    box-sizing: border-box;
+    margin: 10px 0;
+    font-family: inherit;
+    overflow: visible;
+    text-transform: none;
+    width: 5rem;
+    display: inline-block;
+    background-color: #7289da;
+    color: #fff;
+    box-shadow: none;
+    border: none;
+    height: calc(1.5em + 0.75rem + 2px);
+    background-clip: padding-box;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+    align-self: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .check::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(0);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .check:hover::before {
+    transform: scale(1);
+  }
+  
+  .check:hover {
+    color: #fff;
+    box-shadow: none;
+    background-color: #94a9f5;
+    cursor: pointer;
+  }
+  
+  .check:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(92, 141, 255, 0.5);
+  }
+  
+  .check:active {
+    transform: scale(0.95);
+  }
+  
+  
+  
+  .message {
+    display: none;
+    border-radius: 10px;
+    padding: 5px;
+    width: 240px;
+    line-height: 1.5;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    /*text-transform: uppercase;*/ 
+  }
+  
+  .message-1 {
+    border: 2px solid #00ff00ad;
+    background-color: #00ff0080;
+  }
+  
+  .message-2 {
+    border: 2px solid #ff4400ad;
+    background-color: #ff440080;
+  }
+  
+  .message-3 {
+    border: 2px solid #ff0000ad;
+    background-color: #ff000080;
+  }
+  
+  .message-4 {
+    border: 2px solid #ffff00ad;
+    background-color: #ffff0080;
+  }
+  
+  .message-5 {
+    border: 2px solid #00ffffad;
+    background-color: #00ffff80;
+  }
+  
 
 .text {
   color: #e2e2e2;
@@ -159,13 +200,92 @@ body::-webkit-scrollbar {
   -webkit-user-drag: none;
   padding: 5px;
   border-radius: 5px;
-  background-color: #282b30;
+  background-color: rgba(40, 43, 48, 0.8);
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 10px;
   right: 10px;
   text-align: right;
+}
+
+.aaa {
+  line-height: 1.15;
+    
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  -webkit-user-drag: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(40, 43, 48, 0.8);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  text-align: right;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+
+.github {
+  line-height: 0.5;
+  
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  -webkit-user-drag: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(40, 43, 48, 0.8);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  text-align: right;
+}
+.github i {
+  color: white;
+}
+
+.lixqa {
+  line-height: 0.5;
+  
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  -webkit-user-drag: none;
+  padding: 1px;
+  border-radius: 5px;
+  background-color: rgba(40, 43, 48, 0.8);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  text-align: right;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.lixqa:hover {
+  color: #fff;
+  box-shadow: none;
+  background-color: #343a40;
+  cursor: pointer;
+}
+
+.github:hover {
+  color: #fff;
+  box-shadow: none;
+  background-color: #343a40;
+  cursor: pointer;
 }
 
 .counterLabel {
@@ -185,4 +305,81 @@ body::-webkit-scrollbar {
 
 .message a {
   color: white;
+}
+
+.popup-container {
+  position: relative;
+  display: inline-block;
+}
+
+.popup-toggle {
+  display: none;
+}
+
+.popup-tab-label {
+  background-color: #1e2124;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: none;
+}
+
+.popup-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(40, 43, 48, 0.8);
+  border-radius: 5px;
+  padding: 20px;
+  z-index: 10000;
+  display: none;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.card-header {
+  background-color: #343a40;
+  border-bottom: none;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.popup-toggle:checked ~ .popup-overlay {
+  display: block;
+}
+
+.popup-toggle:checked ~ .popup-content {
+  display: block;
+}
+
+.user-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+}
+
+.fa-lixqa {
+  display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('https://lixqa.de/img/lixqa-logo/new/lixqa-logo-transparent-256x256.png');
+    background-size: cover;
 }

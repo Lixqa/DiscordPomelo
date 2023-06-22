@@ -103,3 +103,22 @@ function showMessage(type, message) {
 function hideMessage() {
     $(".message").hide();
 }
+
+document.addEventListener("click", function(event) {
+    var popupContent = document.querySelector(".popup-content");
+    var popupToggle = document.querySelector(".popup-toggle");
+    var popupOverlay = document.querySelector(".popup-overlay");
+  
+    if (event.target === popupOverlay && popupToggle.checked) {
+      popupToggle.checked = false;
+    }
+  });
+  
+  document.addEventListener("keydown", function(event) {
+    var popupToggle = document.querySelector(".popup-toggle");
+  
+    if (event.key === "Escape" && popupToggle.checked) {
+      popupToggle.checked = false;
+    }
+  });
+  
