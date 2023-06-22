@@ -1,43 +1,33 @@
 let socket;
 $(window).on("load", async function() {
     await printApiStatus();
-
     showMessage("message-4", "<strong>NOTE: </strong>Due the high demand we expect higher loading times and some errors");
-
     $(".check").on("click", async function(e) {
         let val = $(".username").val().trim().toLowerCase();
-
         if(val == "") {
             showMessage("message-3", `
             ⚠️Username can't be empty!
             `);
             return;
         }
-
         if(!apiStatus) {
             showMessage("message-3", `
             🚨API not available, try again in one hour!
             `);
             return;
         }
-
         showMessage("message-5", `
         🔍Checking... Wait up to 30 seconds!
         `);
-
         $(".check").attr("disabled", "disabled");
         $(".check").val("● ● ●");
-
         let res = await sendApi({
             url: "https://api.lixqa.de/v2/discord/pomelo-lookup/?username=" + val
         });
         console.log(res);
-
         $(".check").removeAttr("disabled");
         $(".check").val("Check");
-
         hideMessage();
-
         if(!res.error) {
             if(res.message == "Available") {
                 showMessage("message-1", `
@@ -55,11 +45,9 @@ $(window).on("load", async function() {
             showMessage("message-3", "🚨" + res.message + ((res.message.includes("Error") || res.message.includes("error")) ? " | If this still happends in some minutes, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>" : ""));
         }
     });
-
     $(".username").on("input", function(e) {
         hideMessage();
     });
-
     socket = new WebSocket('wss://lixqa.de:2319');
     socket.addEventListener('open', function (event) {
         socket.send(JSON.stringify({
@@ -69,7 +57,6 @@ $(window).on("load", async function() {
         wsKey: "8gGzif3T4YVqV8d8",
         channels: ["Pomelo","StatusSystem"]
         }));
-
         socket.addEventListener('message', async function (event) {
             let socketData = JSON.parse(event.data);
             if(socketData.channel != "Pomelo" && socketData.channel != "StatusSystem") return;
@@ -84,41 +71,18 @@ $(window).on("load", async function() {
         });
     });
 });
-
 function showMessage(type, message) {
     let element = $(".message");
-
     element.removeClass("message-1");
     element.removeClass("message-2");
     element.removeClass("message-3");
     element.removeClass("message-4");
     element.removeClass("message-5");
-
     element.html(message);
     element.addClass(type);
-
     element.show();
 }
 
 function hideMessage() {
     $(".message").hide();
 }
-
-document.addEventListener("click", function(event) {
-    var popupContent = document.querySelector(".popup-content");
-    var popupToggle = document.querySelector(".popup-toggle");
-    var popupOverlay = document.querySelector(".popup-overlay");
-  
-    if (event.target === popupOverlay && popupToggle.checked) {
-      popupToggle.checked = false;
-    }
-  });
-  
-  document.addEventListener("keydown", function(event) {
-    var popupToggle = document.querySelector(".popup-toggle");
-  
-    if (event.key === "Escape" && popupToggle.checked) {
-      popupToggle.checked = false;
-    }
-  });
-  
