@@ -17,19 +17,25 @@ $(window).on("load", async function() {
             return;
         }
         showMessage("message-5", `
-        🔍Checking... Wait up to 30 seconds!
+        🔍Checking...
         `);
         $(".check").attr("disabled", "disabled");
         $(".check").val("● ● ●");
         let res = await sendApi({
-            url: "https://api.lixqa.de/v2/discord/pomelo-lookup/?username=" + val
+            url: "https://api.lixqa.de/v3/discord/pomelo/" + val
         });
         console.log(res);
-        $(".check").removeAttr("disabled");
         $(".check").val("Check");
+        if(res.code == "RATE_LIMITED") {
+            setTimeout(function() {
+                $(".check").removeAttr("disabled");
+            }, 1000);
+        } else {
+            $(".check").removeAttr("disabled");
+        }
         hideMessage();
         if(!res.error) {
-            if(res.message == "Available") {
+            /*if(res.message == "Available") {
                 showMessage("message-1", `
                 ✔️You're lucky!<br>
                 <strong><span style="text-decoration:underline;">` + val + `</span> is available.</strong>
@@ -39,10 +45,28 @@ $(window).on("load", async function() {
                 😭Sorry...<br>
                 <strong><span style="text-decoration:underline;">` + val + `</span> is taken or reserved.</strong>
                 `);
+            }*/
+
+            if(res.data.check.status == 0) {
+                showMessage("message-3", "🚨Error(s):<br>" + res.data.check.errors.map(e => e.message).join("<br><hr>"));
+            } else if(res.data.check.status == 1) {
+                showMessage("message-3", "🚨Looks like all <strong>" + res.data.check.attempt + "</strong> attempts to check your username failed. If this error still occurs in 1 hour, contact us on discord.")
+            } else if(res.data.check.status == 2) {
+                showMessage("message-1", `
+                ✔️You're lucky!<br>
+                <strong><span style="text-decoration:underline;">` + val + `</span> is available.</strong>
+                `);
+            } else if(res.data.check.status == 3) {
+                showMessage("message-2", `
+                😭Sorry...<br>
+                <strong><span style="text-decoration:underline;">` + val + `</span> is taken or reserved.</strong>
+                `);
+            } else {
+                showMessage("message-3", "🚨 Something went wrong. Check console and report on discord");
             }
         } else {
-            if(res.message == "Rate limited") return showMessage("message-3", "⌛ Slow down for 30 seconds!");
-            showMessage("message-3", "🚨" + res.message + ((res.message.includes("Error") || res.message.includes("error")) ? " | If this still happends in some minutes, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>" : ""));
+            if(res.code == "RATE_LIMITED") return showMessage("message-3", "⌛ Slow down for " + Math.floor(res.data.retryAfter/1000) + " seconds!");
+            showMessage("message-3", "🚨" + res.message + " | If this still happends in some minutes, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>");
         }
     });
     $(".username").on("input", function(e) {
