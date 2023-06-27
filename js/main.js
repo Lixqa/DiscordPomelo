@@ -66,7 +66,7 @@ $(window).on("load", async function() {
             }
         } else {
             if(res.code == "RATE_LIMITED") return showMessage("message-3", "⌛ Slow down for " + Math.floor(res.data.retryAfter/1000) + " seconds!");
-            if(res.code == "TEMPORARILY_DISABLED") return showMessage("message-3", "Temporarily disabled for maintenance");
+            if(res.code == "TEMPORARILY_DISABLED") return showMessage("message-3", "🚨Temporarily disabled for maintenance");
             showMessage("message-3", "🚨" + res.message + " | If this still happends in a hour, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>");
         }
     });
