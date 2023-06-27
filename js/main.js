@@ -1,7 +1,7 @@
 let socket;
 $(window).on("load", async function() {
     await printApiStatus();
-    showMessage("message-4", "<strong>INFO: </strong>We have now updated our api! It is now much faster and does not error. Click<a href='https://github.com/Lixqa/DiscordPomelo#API'>here</a> to read the docs.");
+    showMessage("message-4", "<strong>INFO: </strong>We have now updated our api! It is now much faster and does not error. Click <a href='https://github.com/Lixqa/DiscordPomelo#API'>here</a> to read the docs.");
     $(".check").on("click", async function(e) {
         let val = $(".username").val().trim().toLowerCase();
         if(val == "") {
