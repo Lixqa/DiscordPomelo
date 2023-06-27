@@ -1,18 +1,18 @@
 let socket;
 $(window).on("load", async function() {
     await printApiStatus();
-    showMessage("message-4", "<strong>INFO: </strong>We have updated our api. Its now faster and dont have so many errors. If you want to use it <a href='https://github.com/Lixqa/DiscordPomelo#API'>click here</a> for the docs.");
+    showMessage("message-4", "<strong>INFO: </strong>We have now updated our api! It is now much faster and does not error. Click<a href='https://github.com/Lixqa/DiscordPomelo#API'>here</a> to read the docs.");
     $(".check").on("click", async function(e) {
         let val = $(".username").val().trim().toLowerCase();
         if(val == "") {
             showMessage("message-3", `
-            ⚠️Username can't be empty!
+            ⚠️ Username can't be empty!
             `);
             return;
         }
         if(!apiStatus) {
             showMessage("message-3", `
-            🚨API not available, try again in one hour!
+            🚨 API unavailable, try again later!
             `);
             return;
         }
@@ -48,17 +48,17 @@ $(window).on("load", async function() {
             }*/
 
             if(res.data.check.status == 0) {
-                showMessage("message-3", "🚨Error(s):<br>" + res.data.check.errors.map(e => e.message).join("<br><hr>"));
+                showMessage("message-3", "🚨 Error(s):<br>" + res.data.check.errors.map(e => e.message).join("<br><hr>"));
             } else if(res.data.check.status == 1) {
-                showMessage("message-3", "🚨Looks like all <strong>" + res.data.check.attempt + "</strong> attempts to check your username failed. If this error still occurs in 1 hour, contact us on discord.")
+                showMessage("message-3", "🚨 Looks like all <strong>" + res.data.check.attempt + "</strong> attempts to check your username failed. If this error still occurs in 1 hour, contact us on discord.")
             } else if(res.data.check.status == 2) {
                 showMessage("message-1", `
-                ✔️You're lucky!<br>
+                ✅ You're lucky!<br>
                 <strong><span style="text-decoration:underline;">` + val + `</span> is available.</strong>
                 `);
             } else if(res.data.check.status == 3) {
                 showMessage("message-2", `
-                😭Sorry...<br>
+                😭 Sorry...<br>
                 <strong><span style="text-decoration:underline;">` + val + `</span> is taken or reserved.</strong>
                 `);
             } else {
@@ -67,7 +67,7 @@ $(window).on("load", async function() {
         } else {
             if(res.code == "RATE_LIMITED") return showMessage("message-3", "⌛ Slow down for " + Math.floor(res.data.retryAfter/1000) + " seconds!");
             if(res.code == "TEMPORARILY_DISABLED") return showMessage("message-3", "Temporarily disabled for maintenance");
-            showMessage("message-3", "🚨" + res.message + " | If this still happends in a hour, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>");
+            showMessage("message-3", "🚨 " + res.message + " | If this still happends in a hour, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>");
         }
     });
     $(".username").on("input", function(e) {
