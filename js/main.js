@@ -48,26 +48,26 @@ $(window).on("load", async function() {
             }*/
 
             if(res.data.check.status == 0) {
-                showMessage("message-3", "🚨 Error(s):<br>" + res.data.check.errors.map(e => e.message).join("<br><hr>"));
+                showMessage("message-3", `🚨 Error(s):<br>${res.data.check.errors.map(e => e.message).join("<br><hr>")}`);
             } else if(res.data.check.status == 1) {
-                showMessage("message-3", "🚨 Looks like all <strong>" + res.data.check.attempt + "</strong> attempts to check your username failed. If this error still occurs in 1 hour, contact us on discord.")
+                showMessage("message-3", `🚨 Looks like all <strong>${res.data.check.attempt}</strong> attempts to check your username failed. If this error still occurs in 1 hour, contact us on discord.`)
             } else if(res.data.check.status == 2) {
                 showMessage("message-1", `
                 ✅ You're lucky!<br>
-                <strong><span style="text-decoration:underline;">` + val + `</span> is available.</strong>
+                <strong><span style="text-decoration:underline;">${val}</span> is available.</strong>
                 `);
             } else if(res.data.check.status == 3) {
                 showMessage("message-2", `
                 😭 Sorry...<br>
-                <strong><span style="text-decoration:underline;">` + val + `</span> is taken or reserved.</strong>
+                <strong><span style="text-decoration:underline;">${val}</span> is taken or reserved.</strong>
                 `);
             } else {
                 showMessage("message-3", "🚨 Something went wrong. Check console and report on discord");
             }
         } else {
-            if(res.code == "RATE_LIMITED") return showMessage("message-3", "⌛ Slow down for " + Math.floor(res.data.retryAfter/1000) + " seconds!");
+            if(res.code == "RATE_LIMITED") return showMessage("message-3", `⌛ Slow down for ${Math.floor(res.data.retryAfter/1000)} seconds!`);
             if(res.code == "TEMPORARILY_DISABLED") return showMessage("message-3", "Temporarily disabled for maintenance");
-            showMessage("message-3", "🚨 " + res.message + " | If this still happends in a hour, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>");
+            showMessage("message-3", `🚨 ${res.message} | If this still happends in a hour, report on: <a href='https://discord.gg/8n7kfX6S4h'>discord.gg/8n7kfX6S4h</a>`);
         }
     });
     $(".username").on("input", function(e) {
