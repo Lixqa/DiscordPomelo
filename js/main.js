@@ -1,7 +1,7 @@
 let socket;
 $(window).on("load", async function() {
     await printApiStatus();
-    showMessage("message-4", "<strong>INFO: </strong>We have updated our api. Its now faster and dont have so many errors. If you want to use it <a href='https://github.com/Lixqa/DiscordPomelo#API'>click here</a> for the docs.");
+    showMessage("message-4", "<strong>INFO: </strong>If you want to use our API, <a href='https://github.com/Lixqa/DiscordPomelo#API'>click here</a> for the docs.");
     $(".check").on("click", async function(e) {
         let val = $(".username").val().trim().toLowerCase();
         if(val == "") {
@@ -17,7 +17,7 @@ $(window).on("load", async function() {
             return;
         }
         showMessage("message-5", `
-        🔍Checking...
+            🔍Checking...
         `);
         $(".check").attr("disabled", "disabled");
         $(".check").val("● ● ●");
@@ -35,18 +35,6 @@ $(window).on("load", async function() {
         }
         hideMessage();
         if(!res.error) {
-            /*if(res.message == "Available") {
-                showMessage("message-1", `
-                ✔️You're lucky!<br>
-                <strong><span style="text-decoration:underline;">` + val + `</span> is available.</strong>
-                `);
-            } else if(res.message == "Taken or reserved") {
-                showMessage("message-2", `
-                😭Sorry...<br>
-                <strong><span style="text-decoration:underline;">` + val + `</span> is taken or reserved.</strong>
-                `);
-            }*/
-
             if(res.data.check.status == 0) {
                 showMessage("message-3", "🚨Error(s):<br>" + res.data.check.errors.map(e => e.message).join("<br><hr>"));
             } else if(res.data.check.status == 1) {
@@ -76,11 +64,11 @@ $(window).on("load", async function() {
     socket = new WebSocket('wss://lixqa.de:2319');
     socket.addEventListener('open', function (event) {
         socket.send(JSON.stringify({
-        channel: "SYSTEM",
-        action: "authorization",
-        name: "PomeloV1-" + (Math.random() + 1).toString(36).substring(7),
-        wsKey: "8gGzif3T4YVqV8d8",
-        channels: ["Pomelo","StatusSystem"]
+            channel: "SYSTEM",
+            action: "authorization",
+            name: "PomeloV1-" + (Math.random() + 1).toString(36).substring(7),
+            wsKey: "8gGzif3T4YVqV8d8",
+            channels: ["Pomelo","StatusSystem"]
         }));
         socket.addEventListener('message', async function (event) {
             let socketData = JSON.parse(event.data);
