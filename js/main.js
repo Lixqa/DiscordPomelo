@@ -22,7 +22,7 @@ $(window).on("load", async function() {
         $(".check").attr("disabled", "disabled");
         $(".check").val("● ● ●");
         let res = await sendApi({
-            url: "https://api.lixqa.de/v3/discord/pomelo/" + val
+            url: "https://api.lixqa.de/v3/discord/pomelo/" + encodeURI(val)
         });
         console.log(res);
         $(".check").val("Check");
