@@ -1,7 +1,9 @@
 let socket;
 $(window).on("load", async function() {
     await printApiStatus();
-    showMessage("message-4", "<strong>INFO: </strong>If you want to use our API, <a href='https://github.com/Lixqa/DiscordPomelo#API'>click here</a> for the docs.");
+    
+    showMessage("message-4", "<strong>Like this project? Support it and donate us on our discord server and unlock cool perks!<strong>");
+    
     $(".check").on("click", async function(e) {
         let val = $(".username").val().trim().toLowerCase();
         if(val == "") {
